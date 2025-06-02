@@ -37,3 +37,19 @@ We would like you to fix the app's user facing issues (both documented and undoc
 Please use version control. Import the supplied code as is to git and commit your changes through that. This will allow us to review the changes you have made.
 
 We expect you should spend no more than 3 hours on this work. We appreciate you taking the time to work on this and understand that sometimes it's not possible to spend as much time as you would like. If there are any aspects of the codebase you would have liked to work on with more time, please detail these in the ReadME file to give us some insight in to your process.
+
+## Summary of Completed Tasks
+
+- Fixed app crash on launch and resolved UI padding discrepancies.
+- Refactored code using MVVM, Hilt, and Jetpack Compose for scalability and clean architecture.
+- Used coroutines + Flow for async data flow and sealed classes for clean UI state handling.
+- Implemented Search functionality to filter characters by name.
+- Used OkHttp Interceptor to centrally handle auth tokens and log responses.
+- Wrote unit tests for repository and ViewModel logic.
+
+## Future Improvements [What I Would Do With More Time]
+
+- Implement more comprehensive unit and UI tests to increase coverage all scenario and reliability.
+- Match the UI more closely to the provided designs.
+- Enhance error handling with check netwrok availablity.
+- Add support for offline caching to improve app usability without network connectivity.
