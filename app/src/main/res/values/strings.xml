@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Game Of Thrones</string>
     <string name="title_home">Characters</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="loading">Loading\n</string>
+    <string name="culture">Culture:</string>
+    <string name="born">Born:</string>
+    <string name="died">Died:</string>
+    <string name="Seasons">Seasons:</string>
+    <string name="notAvailable">not available</string>
+    <string name="stillALive">Still Alive</string>
 </resources>
