@@ -40,8 +40,9 @@ class CharacterViewModel @Inject constructor(
         val currentCharacterList = (uiState.value as? Uistate.Success)?.result ?: emptyList()
 
         _filterCharacterList.value =
-            if (query.isNotEmpty()) {
-                currentCharacterList.filter { it.name.startsWith(query, ignoreCase = true) }
+            if (query.isNotBlank()) {
+                currentCharacterList.filter { it.name.contains(query, ignoreCase = true)
+                        || it.culture.contains(query, ignoreCase = true) }
             } else {
                 currentCharacterList
             }

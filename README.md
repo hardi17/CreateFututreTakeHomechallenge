@@ -1,39 +1,27 @@
-# Tech Test
+# Game of Thrones Characters 
+- The application uses an API to display lists of data about characters from the show "Game of Thrones" with search functionality and charcater detail screen for all information about character like aliases, seasons, tv series and played by.
 
-You have been provided with an in-development Android app. The application uses an API to display lists of data about characters from the show "Game of Thrones". The project has some bugs and notable UI mismatches compared to the given designs.
+## Main Features 
+- Language : Kotlin
+- Design : Jetpack Compose
+- Android Architecture : MVVM
+- Dependency Injection : Hilt
+- Coroutines and kotlin Flow api
+- Retrofit : Networking libraries
+- Testing : JUnit, Mockito
 
-## Some issues that have been reported
+## Screens
+<p float="left">
+  <img src="https://github.com/user-attachments/assets/5b8a9879-6337-4c36-952e-55d2c15681aa" width="18%" />
+  <img src="https://github.com/user-attachments/assets/f3839c7e-5800-40be-803d-418fe1d6004f" width="18%" />
+   <img src="https://github.com/user-attachments/assets/82af6ed8-4c6c-4bf9-8403-d5ead86b5586" width="18%" />
+<img src="https://github.com/user-attachments/assets/0fd9bc74-fddb-4e27-bca0-e755b8189d80" width="18%" />
+  <img src="https://github.com/user-attachments/assets/1ab8c29f-7116-480f-86b8-de77190fb339" width="18%" />
+</p>
 
-- App crashes on launch
-- Major discrepancies with the designs e.g. white padding
+## Hi there! 👋
+I’m Hardi Rachh, an experienced Android developer who loves exploring new frameworks and tools.
+Always open to connect and collaborate, feel free to reach out to me on: 😊
 
-## Improvements required
-
-- A new feature needs to be added that would allow a user to search the list by character name.
-
-## Resources
-
-The API endpoint is available from:
-[https://yj8ke8qonl.execute-api.eu-west-1.amazonaws.com/characters](https://yj8ke8qonl.execute-api.eu-west-1.amazonaws.com/characters)
-Requests to that endpoint will require the following header:
-"Authorization": "Bearer 754t!si@glcE2qmOFEcN"
-
-Designs: 
-
-![img_design_1.png](app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fimg_design_1.png) ![img_design_2.png](app%2Fsrc%2Fmain%2Fres%2Fdrawable%2Fimg_design_2.png)
-
-## Criteria on which we will assess your submission
-
-- Closeness to designs (pragmatism is encouraged and pixel perfection is NOT required)
-- Code quality, included but not limited to, design patterns and organisation of the application code
-- Scalability
-- Error handling
-- Unit tests
-
-## Submission details
-
-We would like you to fix the app's user facing issues (both documented and undocumented), add the additional search feature and submit the codebase in a more scalable state.
-
-Please use version control. Import the supplied code as is to git and commit your changes through that. This will allow us to review the changes you have made.
-
-We expect you should spend no more than 3 hours on this work. We appreciate you taking the time to work on this and understand that sometimes it's not possible to spend as much time as you would like. If there are any aspects of the codebase you would have liked to work on with more time, please detail these in the ReadME file to give us some insight in to your process.
+- LinkedIn : https://www.linkedin.com/in/hardi-r/
+- Medium : https://hardirachh.medium.com/

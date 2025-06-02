@@ -1,6 +1,8 @@
 package com.createfuture.takehome.ui.home
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -21,11 +23,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.paint
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -36,14 +39,16 @@ import com.createfuture.takehome.ui.commonui.ErrorView
 import com.createfuture.takehome.ui.commonui.LoadingView
 import com.createfuture.takehome.utils.Uistate
 
-@Preview
 @Composable
 fun CharacterScreen(
+    onCharacterClick: (character: ApiCharacter) -> Unit,
     viewModel: CharacterViewModel = hiltViewModel()
 ) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
     val query by viewModel.characterName.collectAsStateWithLifecycle()
     val filterList by viewModel.filterCharacterList.collectAsStateWithLifecycle()
+
+    val foucsManager = LocalSoftwareKeyboardController.current
 
     Scaffold(
         content = { paddingValues ->
@@ -57,7 +62,13 @@ fun CharacterScreen(
                     )
             ) {
                 Column(
-                    modifier = Modifier.padding(paddingValues)
+                    modifier = Modifier
+                        .padding(paddingValues)
+                        .pointerInput(Unit) {
+                            detectTapGestures(onPress = {
+                                foucsManager?.hide()
+                            })
+                        }
                 ) {
                     OutlinedTextField(
                         colors = OutlinedTextFieldDefaults.colors(Color.White),
@@ -69,7 +80,7 @@ fun CharacterScreen(
                             .fillMaxWidth()
                             .background(color = Color.Transparent, shape = RectangleShape)
                     )
-                    CharacterContent(filterList, uiState)
+                    CharacterContent(filterList, uiState, onCharacterClick)
                 }
             }
         }
@@ -77,7 +88,11 @@ fun CharacterScreen(
 }
 
 @Composable
-fun CharacterContent(filterList: List<ApiCharacter>, uiState: Uistate<List<ApiCharacter>>) {
+fun CharacterContent(
+    filterList: List<ApiCharacter>,
+    uiState: Uistate<List<ApiCharacter>>,
+    onCharacterClick: (character: ApiCharacter) -> Unit
+) {
     when (uiState) {
         is Uistate.Loading -> {
             LoadingView()
@@ -86,7 +101,7 @@ fun CharacterContent(filterList: List<ApiCharacter>, uiState: Uistate<List<ApiCh
         is Uistate.Success -> {
             if (uiState.result.isNotEmpty()) {
                 if (filterList.isNotEmpty()) {
-                    CharacterListView(filterList)
+                    CharacterListView(filterList, onCharacterClick)
                 } else {
                     ErrorView(stringResource(R.string.no_data_found))
                 }
@@ -99,23 +114,27 @@ fun CharacterContent(filterList: List<ApiCharacter>, uiState: Uistate<List<ApiCh
     }
 }
 
-@Preview
 @Composable
-fun CharacterListView(charList: List<ApiCharacter>) {
+fun CharacterListView(
+    charList: List<ApiCharacter>,
+    onCharacterClick: (character: ApiCharacter) -> Unit
+) {
     LazyColumn {
         items(charList) { item ->
-            CharacterItem(item)
+            CharacterItem(item, onCharacterClick)
         }
     }
 }
 
-@Preview
 @Composable
-fun CharacterItem(it: ApiCharacter) {
+fun CharacterItem(it: ApiCharacter, onCharacterClick: (character: ApiCharacter) -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .padding(start = 10.dp, end = 10.dp, top = 4.dp, bottom = 4.dp)
+            .clickable {
+                onCharacterClick(it)
+            }
     ) {
         CharacterDetailSection(it, Modifier.weight(1f))
         SeasonsDetailSection(it, Modifier.weight(1f))
@@ -128,7 +147,6 @@ fun CharacterItem(it: ApiCharacter) {
 
 }
 
-@Preview
 @Composable
 fun SeasonsDetailSection(it: ApiCharacter, modifier: Modifier) {
     Column(
@@ -151,7 +169,6 @@ fun SeasonsDetailSection(it: ApiCharacter, modifier: Modifier) {
     }
 }
 
-@Preview
 @Composable
 fun CharacterDetailSection(it: ApiCharacter, modifier: Modifier) {
     Column(
@@ -209,17 +226,17 @@ fun CharacterDetailSection(it: ApiCharacter, modifier: Modifier) {
 fun getSeasons(tvSeries: List<String>): String {
     return tvSeries.joinToString(", ") {
         when (it) {
-            "Season 1" -> "I "
-            "Season 2" -> "II, "
-            "Season 3" -> "III, "
-            "Season 4" -> "IV, "
-            "Season 5" -> "V, "
-            "Season 6" -> "VI, "
-            "Season 7" -> "VII, "
+            "Season 1" -> "I"
+            "Season 2" -> "II"
+            "Season 3" -> "III"
+            "Season 4" -> "IV"
+            "Season 5" -> "V"
+            "Season 6" -> "VI"
+            "Season 7" -> "VII"
             "Season 8" -> "VIII"
             else -> ""
         }
-    }.trim().trimEnd(',')
+    }.trim()
 }
 
 

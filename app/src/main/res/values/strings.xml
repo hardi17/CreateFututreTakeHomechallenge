@@ -7,7 +7,11 @@
     <string name="born">Born:</string>
     <string name="died">Died:</string>
     <string name="Seasons">Seasons:</string>
+    <string name="gender">Gender:</string>
     <string name="notAvailable">Not available</string>
     <string name="stillALive">Still Alive</string>
     <string name="no_data_found">No Result Found</string>
+    <string name="aliases">Aliases:</string>
+    <string name="tvseries">Tv Series:</string>
+    <string name="playedby">Played By:</string>
 </resources>
