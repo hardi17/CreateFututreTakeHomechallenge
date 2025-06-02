@@ -7,6 +7,7 @@
     <string name="born">Born:</string>
     <string name="died">Died:</string>
     <string name="Seasons">Seasons:</string>
-    <string name="notAvailable">not available</string>
+    <string name="notAvailable">Not available</string>
     <string name="stillALive">Still Alive</string>
+    <string name="no_data_found">No Result Found</string>
 </resources>

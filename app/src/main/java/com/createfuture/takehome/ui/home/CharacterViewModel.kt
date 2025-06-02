@@ -24,8 +24,27 @@ class CharacterViewModel @Inject constructor(
     private val _uiState = MutableStateFlow<Uistate<List<ApiCharacter>>>(Uistate.Loading)
     val uiState: StateFlow<Uistate<List<ApiCharacter>>> = _uiState
 
+    private val _characterName = MutableStateFlow("")
+    val characterName: StateFlow<String> = _characterName
+
+    private val _filterCharacterList = MutableStateFlow<List<ApiCharacter>>(emptyList())
+    val filterCharacterList: StateFlow<List<ApiCharacter>> = _filterCharacterList
+
     init {
         loadCharacters()
+    }
+
+    fun filterCharacterListOnSearch(query: String = _characterName.value) {
+        _characterName.value = query
+
+        val currentCharacterList = (uiState.value as? Uistate.Success)?.result ?: emptyList()
+
+        _filterCharacterList.value =
+            if (query.isNotEmpty()) {
+                currentCharacterList.filter { it.name.startsWith(query, ignoreCase = true) }
+            } else {
+                currentCharacterList
+            }
     }
 
     private fun loadCharacters(){
@@ -33,10 +52,11 @@ class CharacterViewModel @Inject constructor(
             repository.fetchCharacters()
                 .flowOn(dispatcherProvider.io)
                 .catch { e ->
-                    _uiState.value = Uistate.Error(e.message)
+                    _uiState.value = Uistate.Error(e.message.toString())
                 }
                 .collect {
                     _uiState.value = Uistate.Success(it)
+                    _filterCharacterList.value = it
                 }
         }
     }
