@@ -47,8 +47,8 @@ class CharacterViewModel @Inject constructor(
             }
     }
 
-    private fun loadCharacters(){
-        viewModelScope.launch (dispatcherProvider.main){
+    fun loadCharacters() {
+        viewModelScope.launch(dispatcherProvider.main) {
             repository.fetchCharacters()
                 .flowOn(dispatcherProvider.io)
                 .catch { e ->
